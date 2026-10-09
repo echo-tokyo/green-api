@@ -2,7 +2,7 @@ import { LogOut, X } from 'lucide-react'
 import { Outlet, useMatch, useNavigate } from 'react-router'
 import { IconButton } from '@/components/ui'
 import { ROUTES } from '@/app/routes'
-import { clearCredentials } from '@/services/green-api'
+import { logout } from '@/services/auth'
 import styles from './MainLayout.module.scss'
 
 export function MainLayout() {
@@ -10,13 +10,13 @@ export function MainLayout() {
   const chatMatch = useMatch(ROUTES.chat)
   const isCloseChatDisabled = chatMatch === null
 
-  function handleCloseChat() {
-    void navigate(ROUTES.search)
+  function handleCloseChat(): void {
+    navigate(ROUTES.search)
   }
 
-  function handleLogout() {
-    clearCredentials()
-    void navigate(ROUTES.login)
+  function handleLogout(): void {
+    logout()
+    navigate(ROUTES.login)
   }
 
   return (

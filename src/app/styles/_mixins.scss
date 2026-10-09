@@ -30,7 +30,6 @@
     pointer-events: none;
     background: var(--pattern-gradient);
     opacity: var(--pattern-opacity);
-    mask: url('@/assets/pattern.svg') repeat 0 0 / var(--pattern-size)
-      auto;
+    mask: url('@/assets/pattern.svg') repeat 0 0 / var(--pattern-size) auto;
   }
 }

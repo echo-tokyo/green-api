@@ -6,6 +6,7 @@ import { defineConfig, type Plugin } from 'vite'
 const CONTENT_SECURITY_POLICY = [
   "default-src 'self'",
   "connect-src 'self' https://*.api.green-api.com",
+  "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data:",
   "font-src 'self' data:",
   "object-src 'none'",

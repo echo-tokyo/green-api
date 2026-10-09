@@ -1,5 +1,5 @@
 import { redirect } from 'react-router'
-import { hasCredentials } from '@/services/green-api'
+import { hasCredentials } from '@/services/credentials'
 import { ROUTES } from './routes'
 
 export function requireAuth() {

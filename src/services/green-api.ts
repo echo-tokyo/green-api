@@ -1,31 +1,13 @@
-import axios from 'axios'
+import axios, { isAxiosError, isCancel, type AxiosError } from 'axios'
+import { toast } from 'sonner'
 import type {
-  Credentials,
   Notification,
   SendMessageResponse,
   StateInstanceResponse,
 } from '@/types/green-api'
+import { getCredentials } from './credentials'
 
-const CREDENTIALS_KEY = 'green-api-credentials'
 const RECEIVE_TIMEOUT_SECONDS = 20
-
-function getCredentials(): Credentials | null {
-  const value = sessionStorage.getItem(CREDENTIALS_KEY)
-
-  return value ? JSON.parse(value) : null
-}
-
-export function saveCredentials(credentials: Credentials): void {
-  sessionStorage.setItem(CREDENTIALS_KEY, JSON.stringify(credentials))
-}
-
-export function clearCredentials(): void {
-  sessionStorage.removeItem(CREDENTIALS_KEY)
-}
-
-export function hasCredentials(): boolean {
-  return getCredentials() !== null
-}
 
 const api = axios.create()
 
@@ -44,6 +26,24 @@ api.interceptors.request.use((config) => {
   config.url = [method, apiTokenInstance, ...params].join('/')
 
   return config
+})
+
+function getErrorMessage(error: AxiosError): string {
+  if (!error.response) return 'Нет соединения с GREEN-API'
+
+  if (error.response.status === 401) {
+    return 'Неверный idInstance или apiTokenInstance'
+  }
+
+  return `Ошибка запроса к GREEN-API (код ${error.response.status})`
+}
+
+api.interceptors.response.use(undefined, (error: unknown) => {
+  if (isAxiosError(error) && !isCancel(error)) {
+    toast.error(getErrorMessage(error))
+  }
+
+  return Promise.reject(error)
 })
 
 export async function getStateInstance(): Promise<string> {
