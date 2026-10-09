@@ -1,0 +1,6 @@
+export { Avatar } from './Avatar/Avatar'
+export { Button } from './Button/Button'
+export { IconButton } from './IconButton/IconButton'
+export { Input } from './Input/Input'
+export { Modal } from './Modal/Modal'
+export { Spinner } from './Spinner/Spinner'
