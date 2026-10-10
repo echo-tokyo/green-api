@@ -39,7 +39,7 @@ export default defineConfig([
       'default-case': 'warn',
       'no-console': 'warn',
       'no-alert': 'warn',
-      'prefer-arrow-callback': 'warn',
+      'prefer-arrow-callback': ['warn', { allowNamedFunctions: true }],
       'no-var': 'warn',
       'object-shorthand': 'warn',
       'prefer-const': 'warn',

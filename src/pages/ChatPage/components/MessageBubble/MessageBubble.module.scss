@@ -1,0 +1,37 @@
+.bubble {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  column-gap: var(--space-2);
+  max-width: min(var(--message-max-width), 85%);
+  padding: 6px var(--space-2) 6px var(--space-3);
+  border-radius: var(--radius-l);
+}
+
+.incoming {
+  align-self: flex-start;
+  background-color: var(--color-message-in);
+  border-bottom-left-radius: var(--space-1);
+}
+
+.outgoing {
+  align-self: flex-end;
+  background-color: var(--color-message-out);
+  border-bottom-right-radius: var(--space-1);
+}
+
+.text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.time {
+  margin-left: auto;
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-base);
+  color: var(--color-text-secondary);
+
+  .outgoing > & {
+    color: var(--color-message-out-meta);
+  }
+}

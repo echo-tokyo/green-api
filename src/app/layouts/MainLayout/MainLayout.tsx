@@ -11,12 +11,12 @@ export function MainLayout() {
   const isCloseChatDisabled = chatMatch === null
 
   function handleCloseChat(): void {
-    navigate(ROUTES.search)
+    void navigate(ROUTES.search)
   }
 
   function handleLogout(): void {
     logout()
-    navigate(ROUTES.login)
+    void navigate(ROUTES.login)
   }
 
   return (

@@ -1,8 +1,8 @@
+import type { Credentials } from '@/types/green-api'
 import { Send } from 'lucide-react'
 import { FormCard } from '@/components/FormCard/FormCard'
 import { Button, Input } from '@/components/ui'
 import { useForm } from '@/hooks/use-form'
-import type { Credentials } from '@/types/green-api'
 import { validateCredentials } from '@/utils/validation'
 import { useLogin } from './use-login'
 

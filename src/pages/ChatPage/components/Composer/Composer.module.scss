@@ -1,0 +1,24 @@
+.composer {
+  display: flex;
+  flex-shrink: 0;
+  align-items: flex-end;
+  gap: var(--space-2);
+  width: min(var(--chat-column-width), 100%);
+}
+
+.input {
+  flex: 1;
+  min-height: var(--icon-button-size-l);
+  max-height: var(--composer-max-height);
+  padding: 15px var(--space-5);
+  line-height: 24px;
+  background-color: var(--color-bg-surface);
+  border: none;
+  border-radius: var(--radius-xl);
+  resize: none;
+  field-sizing: content;
+
+  &:focus-visible {
+    outline: none;
+  }
+}

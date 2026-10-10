@@ -1,0 +1,39 @@
+@use '@/app/styles/mixins' as *;
+
+.list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  width: 100%;
+  min-height: 0;
+  padding: var(--space-2)
+    max(var(--space-2), calc((100% - var(--chat-column-width)) / 2));
+  overflow-y: auto;
+
+  > :first-child {
+    margin-top: auto;
+  }
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.day {
+  @include chip;
+
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  align-self: center;
+  margin: var(--space-2) 0;
+}
+
+.empty {
+  @include chip;
+
+  align-self: center;
+  margin-bottom: auto;
+}

@@ -17,6 +17,14 @@
   outline-offset: 2px;
 }
 
+@mixin chip {
+  padding: 2px var(--space-3);
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-medium);
+  background-color: var(--color-bg-chip);
+  border-radius: var(--radius-pill);
+}
+
 @mixin pattern-background {
   position: relative;
   isolation: isolate;
@@ -28,6 +36,7 @@
     inset: 0;
     z-index: -1;
     pointer-events: none;
+    will-change: transform;
     background: var(--pattern-gradient);
     opacity: var(--pattern-opacity);
     mask: url('@/assets/pattern.svg') repeat 0 0 / var(--pattern-size) auto;

@@ -1,0 +1,19 @@
+@use '@/app/styles/mixins' as *;
+
+.header {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: var(--space-3);
+  width: min(var(--chat-column-width), 100%);
+  padding: var(--space-2) var(--space-4);
+  background-color: var(--color-bg-surface);
+  border-radius: var(--radius-l);
+}
+
+.title {
+  @include truncate;
+
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-medium);
+}

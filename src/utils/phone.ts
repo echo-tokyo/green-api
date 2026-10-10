@@ -11,6 +11,10 @@ export function isValidPhone(value: string): boolean {
   return length >= MIN_PHONE_LENGTH && length <= MAX_PHONE_LENGTH
 }
 
+export function formatPhone(phone: string): string {
+  return `+${normalizePhone(phone)}`
+}
+
 export function toPhoneChatId(phone: string): string {
   return `${normalizePhone(phone)}@c.us`
 }

@@ -22,6 +22,7 @@
 
   --color-message-in: #212121;
   --color-message-out: #8774e1;
+  --color-message-out-meta: rgb(255 255 255 / 70%);
 
   --pattern-opacity: 0.3;
   --pattern-gradient:
@@ -67,6 +68,8 @@
 
   --sidebar-width: 442px;
   --chat-column-width: 696px;
+  --message-max-width: 480px;
+  --composer-max-height: 200px;
   --panel-gap: 12px;
   --pattern-size: 420px;
 

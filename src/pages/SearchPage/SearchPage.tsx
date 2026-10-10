@@ -1,10 +1,10 @@
+import type { PhoneForm } from '@/types/form'
 import { MessageCirclePlus } from 'lucide-react'
 import { useNavigate } from 'react-router'
 import { getChatRoute } from '@/app/routes'
 import { FormCard } from '@/components/FormCard/FormCard'
 import { Button, Input } from '@/components/ui'
 import { useForm } from '@/hooks/use-form'
-import type { PhoneForm } from '@/types/form'
 import { normalizePhone } from '@/utils/phone'
 import { validatePhone } from '@/utils/validation'
 import styles from './SearchPage.module.scss'
@@ -15,7 +15,7 @@ export function SearchPage() {
   const navigate = useNavigate()
 
   function openChat({ phone }: PhoneForm): void {
-    navigate(getChatRoute(normalizePhone(phone)))
+    void navigate(getChatRoute(normalizePhone(phone)))
   }
 
   const { values, errors, handleChange, handleSubmit } = useForm(
