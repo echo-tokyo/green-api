@@ -1,7 +1,7 @@
 import type { Message } from '@/types/chat'
 import { memo } from 'react'
 import clsx from 'clsx'
-import { formatTime } from '@/utils/date'
+import { MessageMeta } from './MessageMeta'
 import styles from './MessageBubble.module.scss'
 
 interface MessageBubbleProps {
@@ -12,19 +12,29 @@ export const MessageBubble = memo(function MessageBubble({
   message,
 }: MessageBubbleProps) {
   const isOutgoing = message.direction === 'outgoing'
+  const status = isOutgoing ? message.status : null
   const bubbleClassName = clsx(
     styles.bubble,
     isOutgoing ? styles.outgoing : styles.incoming,
   )
-  const time = formatTime(message.timestamp)
-  const dateTime = new Date(message.timestamp).toISOString()
+  const placeholderClassName = clsx(styles.meta, styles.placeholder)
 
   return (
     <div className={bubbleClassName}>
-      <p className={styles.text}>{message.text}</p>
-      <time className={styles.time} dateTime={dateTime}>
-        {time}
-      </time>
+      <p className={styles.text}>
+        {message.text}
+        <MessageMeta
+          timestamp={message.timestamp}
+          status={status}
+          className={placeholderClassName}
+          aria-hidden
+        />
+      </p>
+      <MessageMeta
+        timestamp={message.timestamp}
+        status={status}
+        className={styles.meta}
+      />
     </div>
   )
 })

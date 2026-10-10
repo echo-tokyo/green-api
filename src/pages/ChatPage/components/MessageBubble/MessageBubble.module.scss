@@ -1,8 +1,5 @@
 .bubble {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  column-gap: var(--space-2);
+  position: relative;
   max-width: min(var(--message-max-width), 85%);
   padding: 6px var(--space-2) 6px var(--space-3);
   border-radius: var(--radius-l);
@@ -25,13 +22,36 @@
   overflow-wrap: anywhere;
 }
 
-.time {
-  margin-left: auto;
+.meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
   font-size: var(--font-size-xs);
-  line-height: var(--line-height-base);
+  line-height: 1;
+  white-space: nowrap;
   color: var(--color-text-secondary);
 
-  .outgoing > & {
+  .outgoing & {
     color: var(--color-message-out-meta);
   }
+
+  &:not(.placeholder) {
+    position: absolute;
+    right: var(--space-2);
+    bottom: 5px;
+  }
+}
+
+.placeholder {
+  margin-left: var(--space-3);
+  visibility: hidden;
+}
+
+.status {
+  flex-shrink: 0;
+}
+
+.failed {
+  color: var(--color-text-on-accent);
+  fill: var(--color-danger);
 }
