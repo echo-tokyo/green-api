@@ -5,7 +5,11 @@ export function useMessages() {
   const [messages, setMessages] = useState<Message[]>([])
 
   function addMessage(message: Message) {
-    setMessages((prevMessages) => [...prevMessages, message])
+    setMessages((prevMessages) => {
+      const isDuplicate = prevMessages.some(({ id }) => id === message.id)
+
+      return isDuplicate ? prevMessages : [...prevMessages, message]
+    })
   }
 
   function updateMessage(id: string, changes: Partial<Message>) {

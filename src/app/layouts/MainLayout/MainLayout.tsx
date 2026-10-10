@@ -1,5 +1,5 @@
 import { LogOut, X } from 'lucide-react'
-import { Outlet, useMatch, useNavigate } from 'react-router'
+import { Outlet, useLocation, useMatch, useNavigate } from 'react-router'
 import { IconButton } from '@/components/ui'
 import { ROUTES } from '@/app/routes'
 import { logout } from '@/services/auth'
@@ -7,6 +7,7 @@ import styles from './MainLayout.module.scss'
 
 export function MainLayout() {
   const navigate = useNavigate()
+  const location = useLocation()
   const chatMatch = useMatch(ROUTES.chat)
   const isCloseChatDisabled = chatMatch === null
 
@@ -36,7 +37,7 @@ export function MainLayout() {
         />
       </nav>
       <main className={styles.content}>
-        <Outlet />
+        <Outlet key={location.pathname} />
       </main>
     </div>
   )

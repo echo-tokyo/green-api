@@ -1,50 +1,11 @@
-import axios, { isAxiosError, isCancel, type AxiosError } from 'axios'
-import { toast } from 'sonner'
 import type {
   Notification,
   SendMessageResponse,
   StateInstanceResponse,
 } from '@/types/green-api'
-import { getCredentials } from './credentials'
+import { api } from './api'
 
 const RECEIVE_TIMEOUT_SECONDS = 20
-
-const api = axios.create()
-
-api.interceptors.request.use((config) => {
-  const credentials = getCredentials()
-
-  if (!credentials) {
-    throw new Error('GREEN-API credentials are not set')
-  }
-
-  const { idInstance, apiTokenInstance } = credentials
-  const serverId = idInstance.slice(0, 4)
-  const [method, ...params] = (config.url ?? '').split('/')
-
-  config.baseURL = `https://${serverId}.api.green-api.com/waInstance${idInstance}`
-  config.url = [method, apiTokenInstance, ...params].join('/')
-
-  return config
-})
-
-function getErrorMessage(error: AxiosError): string {
-  if (!error.response) return 'Нет соединения с GREEN-API'
-
-  if (error.response.status === 401) {
-    return 'Неверный idInstance или apiTokenInstance'
-  }
-
-  return `Ошибка запроса к GREEN-API (код ${error.response.status})`
-}
-
-api.interceptors.response.use(undefined, (error: unknown) => {
-  if (isAxiosError(error) && !isCancel(error)) {
-    toast.error(getErrorMessage(error))
-  }
-
-  return Promise.reject(error)
-})
 
 export async function getStateInstance(): Promise<string> {
   const response = await api.get<StateInstanceResponse>('getStateInstance')
@@ -70,11 +31,12 @@ export async function receiveNotification(
   const response = await api.get<Notification | null>('receiveNotification', {
     params: { receiveTimeout: RECEIVE_TIMEOUT_SECONDS },
     signal,
+    silent: true,
   })
 
   return response.data
 }
 
 export async function deleteNotification(receiptId: number): Promise<void> {
-  await api.delete(`deleteNotification/${receiptId}`)
+  await api.delete(`deleteNotification/${receiptId}`, { silent: true })
 }
