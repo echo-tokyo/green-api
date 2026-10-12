@@ -3,9 +3,10 @@ import type {
   SendMessageResponse,
   StateInstanceResponse,
 } from '@/types/green-api'
-import { api } from './api'
+import { api } from './client'
 
 const RECEIVE_TIMEOUT_SECONDS = 20
+const RECEIVE_REQUEST_TIMEOUT_MS = (RECEIVE_TIMEOUT_SECONDS + 5) * 1000
 
 export async function getStateInstance(): Promise<string> {
   const response = await api.get<StateInstanceResponse>('getStateInstance')
@@ -30,13 +31,13 @@ export async function receiveNotification(
 ): Promise<Notification | null> {
   const response = await api.get<Notification | null>('receiveNotification', {
     params: { receiveTimeout: RECEIVE_TIMEOUT_SECONDS },
+    timeout: RECEIVE_REQUEST_TIMEOUT_MS,
     signal,
-    silent: true,
   })
 
   return response.data
 }
 
 export async function deleteNotification(receiptId: number): Promise<void> {
-  await api.delete(`deleteNotification/${receiptId}`, { silent: true })
+  await api.delete(`deleteNotification/${receiptId}`)
 }

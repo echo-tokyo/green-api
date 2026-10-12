@@ -1,7 +1,7 @@
-import type { Message } from '@/types/chat'
 import { formatDay, getStartOfDay } from '@/utils/date'
+import type { Message } from '../../lib/types'
 
-export interface MessageGroup {
+interface MessageGroup {
   day: number
   label: string
   messages: Message[]

@@ -1,4 +1,4 @@
-export type MessageDirection = 'incoming' | 'outgoing'
+type MessageDirection = 'incoming' | 'outgoing'
 
 export type MessageStatus = 'sending' | 'sent' | 'failed'
 

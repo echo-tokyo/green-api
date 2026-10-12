@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from 'react'
-import type { MessageStatus } from '@/types/chat'
 import { formatTime } from '@/utils/date'
+import type { MessageStatus } from '../../lib/types'
 import { MessageStatusIcon } from './MessageStatusIcon'
 
 interface MessageMetaProps extends HTMLAttributes<HTMLSpanElement> {

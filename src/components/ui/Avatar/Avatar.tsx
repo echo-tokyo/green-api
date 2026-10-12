@@ -23,12 +23,21 @@ const GRADIENTS = [
 
 const FIRST_LETTER = /\p{L}/u
 
+function getGradient(name: string): string | undefined {
+  let charCodeSum = 0
+
+  for (const char of name) {
+    charCodeSum += char.charCodeAt(0)
+  }
+
+  return GRADIENTS[charCodeSum % GRADIENTS.length]
+}
+
 export function Avatar({ name, size = 'm', className }: AvatarProps) {
   const letter = name.match(FIRST_LETTER)?.[0]?.toUpperCase()
   const content = letter ?? <User className={styles.icon} />
 
-  const gradientIndex = name.charCodeAt(0) % GRADIENTS.length
-  const avatarStyle: CSSProperties = { background: GRADIENTS[gradientIndex] }
+  const avatarStyle: CSSProperties = { background: getGradient(name) }
   const avatarClassName = clsx(styles.avatar, styles[size], className)
 
   return (

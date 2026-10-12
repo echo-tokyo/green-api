@@ -1,11 +1,12 @@
 import { fileURLToPath, URL } from 'node:url'
-import react, { reactCompilerPreset } from '@vitejs/plugin-react'
 import babel from '@rolldown/plugin-babel'
-import { defineConfig, type Plugin } from 'vite'
+import react, { reactCompilerPreset } from '@vitejs/plugin-react'
+import type { Plugin } from 'vite'
+import { defineConfig } from 'vitest/config'
 
 const CONTENT_SECURITY_POLICY = [
   "default-src 'self'",
-  "connect-src 'self' https://*.api.green-api.com",
+  "connect-src 'self' https://*.green-api.com",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data:",
   "font-src 'self' data:",
@@ -43,5 +44,9 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
+  },
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./src/tests/setup.ts'],
   },
 })

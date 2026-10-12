@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes } from 'react'
 import clsx from 'clsx'
-import type { LucideIcon } from 'lucide-react'
+import type { IconComponent } from '@/types/icon'
 import styles from './IconButton.module.scss'
 
 type IconButtonVariant = 'ghost' | 'accent'
@@ -10,7 +10,7 @@ interface IconButtonProps extends Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
   'children'
 > {
-  icon: LucideIcon
+  icon: IconComponent
   label: string
   variant?: IconButtonVariant
   size?: IconButtonSize

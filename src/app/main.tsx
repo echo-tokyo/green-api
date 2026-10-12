@@ -5,7 +5,7 @@ import { Toaster } from 'sonner'
 import '@fontsource/roboto/400.css'
 import '@fontsource/roboto/500.css'
 import './styles/index.scss'
-import { router } from './router'
+import { router } from './router/router'
 
 const rootElement = document.getElementById('root')
 

@@ -8,5 +8,14 @@
   "printWidth": 80,
   "bracketSpacing": true,
   "arrowParens": "always",
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "plugins": ["@ianvs/prettier-plugin-sort-imports"],
+  "importOrder": [
+    "^react$",
+    "<THIRD_PARTY_MODULES>",
+    "^@/",
+    "^\\.(?!.*\\.s?css$)",
+    "\\.s?css$"
+  ],
+  "importOrderTypeScriptVersion": "5.0.0"
 }

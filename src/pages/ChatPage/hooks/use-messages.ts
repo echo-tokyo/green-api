@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { Message } from '@/types/chat'
+import type { Message } from '../lib/types'
 
 export function useMessages() {
   const [messages, setMessages] = useState<Message[]>([])

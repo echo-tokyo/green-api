@@ -1,16 +1,16 @@
-import type { SubmitEvent, ReactNode } from 'react'
-import type { LucideIcon } from 'lucide-react'
+import type { ReactNode, SubmitEvent } from 'react'
+import type { IconComponent } from '@/types/icon'
 import styles from './FormCard.module.scss'
 
 interface FormCardProps {
-  icon: LucideIcon
+  icon: IconComponent
   title: string
   description: string
   onSubmit: (event: SubmitEvent<HTMLFormElement>) => void
   children: ReactNode
 }
 
-const ICON_SIZE = 56
+const ICON_SIZE = 64
 
 export function FormCard({
   icon: Icon,

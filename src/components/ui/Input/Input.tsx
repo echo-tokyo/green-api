@@ -13,6 +13,7 @@ export function Input({
   hint,
   error,
   id,
+  required = false,
   className,
   ...rest
 }: InputProps) {
@@ -24,6 +25,7 @@ export function Input({
   const descriptionId = description ? `${inputId}-description` : undefined
 
   const fieldClassName = clsx(styles.field, className)
+  const labelClassName = clsx(styles.label, required && styles.required)
   const inputClassName = clsx(styles.input, hasError && styles.invalid)
   const descriptionClassName = clsx(
     styles.description,
@@ -33,13 +35,14 @@ export function Input({
   return (
     <div className={fieldClassName}>
       {label && (
-        <label htmlFor={inputId} className={styles.label}>
+        <label htmlFor={inputId} className={labelClassName}>
           {label}
         </label>
       )}
       <input
         id={inputId}
         className={inputClassName}
+        required={required}
         aria-invalid={hasError}
         aria-describedby={descriptionId}
         {...rest}

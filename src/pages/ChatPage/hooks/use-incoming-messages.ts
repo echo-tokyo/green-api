@@ -1,12 +1,12 @@
 import { useEffect, useEffectEvent } from 'react'
 import { useNavigate } from 'react-router'
 import { toast } from 'sonner'
-import { getChatRoute } from '@/app/routes'
-import { pollNotifications } from '@/services/notifications'
-import type { Message } from '@/types/chat'
+import { getChatRoute } from '@/config/routes'
+import { pollNotifications } from '@/services/api/polling'
 import type { NotificationBody } from '@/types/green-api'
-import { parseIncomingMessage } from '@/utils/message'
 import { formatPhone } from '@/utils/phone'
+import { parseIncomingMessage } from '../lib/message'
+import type { Message } from '../lib/types'
 
 interface UseIncomingMessagesOptions {
   phone: string

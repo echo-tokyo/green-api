@@ -1,7 +1,7 @@
-import { Check, CircleAlert, Clock3, type LucideIcon } from 'lucide-react'
 import clsx from 'clsx'
-import type { MessageStatus } from '@/types/chat'
-import styles from './MessageBubble.module.scss'
+import { Check, CircleAlert, Clock3, type LucideIcon } from 'lucide-react'
+import type { MessageStatus } from '../../lib/types'
+import styles from './MessageStatusIcon.module.scss'
 
 interface MessageStatusIconProps {
   status: MessageStatus

@@ -9,7 +9,7 @@ export function ChatHeader({ name }: ChatHeaderProps) {
   return (
     <header className={styles.header}>
       <Avatar name={name} size='s' />
-      <h2 className={styles.title}>{name}</h2>
+      <h1 className={styles.title}>{name}</h1>
     </header>
   )
 }

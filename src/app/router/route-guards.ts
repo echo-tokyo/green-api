@@ -1,6 +1,6 @@
 import { redirect } from 'react-router'
-import { hasCredentials } from '@/services/credentials'
-import { ROUTES } from './routes'
+import { ROUTES } from '@/config/routes'
+import { hasCredentials } from '@/services/auth/credentials'
 
 export function requireAuth() {
   if (!hasCredentials()) return redirect(ROUTES.login)

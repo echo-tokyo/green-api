@@ -1,8 +1,9 @@
 import { LogOut, X } from 'lucide-react'
 import { Outlet, useLocation, useMatch, useNavigate } from 'react-router'
 import { IconButton } from '@/components/ui'
-import { ROUTES } from '@/app/routes'
-import { logout } from '@/services/auth'
+import { ROUTES } from '@/config/routes'
+import { logout } from '@/services/auth/session'
+import { useUnauthorizedRedirect } from './use-unauthorized-redirect'
 import styles from './MainLayout.module.scss'
 
 export function MainLayout() {
@@ -10,6 +11,8 @@ export function MainLayout() {
   const location = useLocation()
   const chatMatch = useMatch(ROUTES.chat)
   const isCloseChatDisabled = chatMatch === null
+
+  useUnauthorizedRedirect()
 
   function handleCloseChat(): void {
     void navigate(ROUTES.search)

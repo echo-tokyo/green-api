@@ -46,12 +46,3 @@
   margin-left: var(--space-3);
   visibility: hidden;
 }
-
-.status {
-  flex-shrink: 0;
-}
-
-.failed {
-  color: var(--color-text-on-accent);
-  fill: var(--color-danger);
-}

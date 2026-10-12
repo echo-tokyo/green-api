@@ -1,6 +1,6 @@
-import type { Message } from '@/types/chat'
 import { memo } from 'react'
 import clsx from 'clsx'
+import type { Message } from '../../lib/types'
 import { MessageMeta } from './MessageMeta'
 import styles from './MessageBubble.module.scss'
 

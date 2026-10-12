@@ -1,20 +1,23 @@
-import { createBrowserRouter } from 'react-router'
+import { createBrowserRouter, type RouteObject } from 'react-router'
+import { AuthLayout } from '@/app/layouts/AuthLayout/AuthLayout'
+import { MainLayout } from '@/app/layouts/MainLayout/MainLayout'
+import { ROUTES } from '@/config/routes'
 import { ChatPage } from '@/pages/ChatPage/ChatPage'
+import { ErrorPage } from '@/pages/ErrorPage/ErrorPage'
 import { LoginPage } from '@/pages/LoginPage/LoginPage'
 import { SearchPage } from '@/pages/SearchPage/SearchPage'
-import { AuthLayout } from './layouts/AuthLayout/AuthLayout'
-import { MainLayout } from './layouts/MainLayout/MainLayout'
 import { redirectToSearch, requireAuth, requireGuest } from './route-guards'
-import { ROUTES } from './routes'
 
-export const router = createBrowserRouter([
+export const routes: RouteObject[] = [
   {
     Component: AuthLayout,
+    ErrorBoundary: ErrorPage,
     loader: requireGuest,
     children: [{ path: ROUTES.login, Component: LoginPage }],
   },
   {
     Component: MainLayout,
+    ErrorBoundary: ErrorPage,
     loader: requireAuth,
     children: [
       { path: ROUTES.search, Component: SearchPage },
@@ -22,4 +25,6 @@ export const router = createBrowserRouter([
     ],
   },
   { path: '*', loader: redirectToSearch },
-])
+]
+
+export const router = createBrowserRouter(routes)

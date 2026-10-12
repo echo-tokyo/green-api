@@ -1,3 +1,5 @@
+import { generatePath } from 'react-router'
+
 export const ROUTES = {
   login: '/login',
   search: '/',
@@ -5,5 +7,5 @@ export const ROUTES = {
 } as const
 
 export function getChatRoute(phone: string): string {
-  return `/chat/${phone}`
+  return generatePath(ROUTES.chat, { phone })
 }

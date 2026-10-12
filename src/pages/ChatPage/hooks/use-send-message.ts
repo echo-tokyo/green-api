@@ -1,7 +1,12 @@
-import { sendMessage } from '@/services/green-api'
-import type { Message } from '@/types/chat'
-import { createOutgoingMessage } from '@/utils/message'
+import { toast } from 'sonner'
+import {
+  getApiErrorMessage,
+  isUnauthorizedError,
+} from '@/services/api/api-error'
+import { sendMessage } from '@/services/api/green-api'
 import { toPhoneChatId } from '@/utils/phone'
+import { createOutgoingMessage } from '../lib/message'
+import type { Message } from '../lib/types'
 
 interface UseSendMessageOptions {
   phone: string
@@ -22,8 +27,10 @@ export function useSendMessage({
     try {
       await sendMessage(toPhoneChatId(phone), text)
       updateMessage(message.id, { status: 'sent' })
-    } catch {
+    } catch (error) {
       updateMessage(message.id, { status: 'failed' })
+
+      if (!isUnauthorizedError(error)) toast.error(getApiErrorMessage(error))
     }
   }
 

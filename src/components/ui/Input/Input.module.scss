@@ -26,6 +26,11 @@
   }
 }
 
+.required::after {
+  content: ' *';
+  color: var(--color-danger);
+}
+
 .input {
   width: 100%;
   height: var(--control-height);

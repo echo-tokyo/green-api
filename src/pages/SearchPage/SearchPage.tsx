@@ -1,10 +1,10 @@
-import type { PhoneForm } from '@/types/form'
 import { MessageCirclePlus } from 'lucide-react'
 import { useNavigate } from 'react-router'
-import { getChatRoute } from '@/app/routes'
 import { FormCard } from '@/components/FormCard/FormCard'
 import { Button, Input } from '@/components/ui'
+import { getChatRoute } from '@/config/routes'
 import { useForm } from '@/hooks/use-form'
+import type { PhoneForm } from '@/types/form'
 import { normalizePhone } from '@/utils/phone'
 import { validatePhone } from '@/utils/validation'
 import styles from './SearchPage.module.scss'
@@ -35,6 +35,7 @@ export function SearchPage() {
         <Input
           name='phone'
           label='Номер телефона'
+          required
           type='tel'
           placeholder='+7 999 123 45 67'
           autoComplete='tel'

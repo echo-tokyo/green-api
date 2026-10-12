@@ -1,0 +1,8 @@
+.status {
+  flex-shrink: 0;
+}
+
+.failed {
+  color: var(--color-text-on-accent);
+  fill: var(--color-danger);
+}
