@@ -16,6 +16,6 @@ if (!rootElement) {
 createRoot(rootElement).render(
   <StrictMode>
     <RouterProvider router={router} />
-    <Toaster theme='dark' position='bottom-center' />
+    <Toaster theme='dark' position='top-center' />
   </StrictMode>,
 )
