@@ -14,7 +14,7 @@ const INITIAL_VALUES: PhoneForm = { phone: '' }
 export function SearchPage() {
   const navigate = useNavigate()
 
-  function openChat({ phone }: PhoneForm): void {
+  function openChat({ phone }: PhoneForm) {
     void navigate(getChatRoute(normalizePhone(phone)))
   }
 

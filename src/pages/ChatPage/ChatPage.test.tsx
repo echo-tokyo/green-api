@@ -1,4 +1,10 @@
-import { render, screen, waitFor, within } from '@testing-library/react'
+import {
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+  within,
+} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { delay, http, HttpResponse } from 'msw'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
@@ -144,5 +150,27 @@ describe('Чат', () => {
     expect(
       within(messageList).queryByText('Сообщение из другого чата'),
     ).not.toBeInTheDocument()
+  })
+
+  it('сохраняет сообщение из другого чата и открывает его из уведомления', async () => {
+    mockIncomingNotification(79990001122, 'Сообщение из другого чата')
+    render(<TestApp path={`/chat/${CHAT_PHONE}`} />)
+
+    fireEvent.click(await screen.findByRole('button', { name: 'Открыть' }))
+
+    expect(
+      await screen.findByRole('heading', { name: '+79990001122' }),
+    ).toBeInTheDocument()
+    expect(
+      within(screen.getByRole('log')).getByText('Сообщение из другого чата'),
+    ).toBeInTheDocument()
+  })
+
+  it('возвращает к поиску при некорректном номере в адресе', async () => {
+    render(<TestApp path='/chat/abc' />)
+
+    expect(
+      await screen.findByRole('heading', { name: 'Новый чат' }),
+    ).toBeInTheDocument()
   })
 })

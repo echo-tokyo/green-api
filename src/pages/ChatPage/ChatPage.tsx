@@ -3,8 +3,7 @@ import { formatPhone, normalizePhone } from '@/utils/phone'
 import { ChatHeader } from './components/ChatHeader/ChatHeader'
 import { Composer } from './components/Composer/Composer'
 import { MessageList } from './components/MessageList/MessageList'
-import { useIncomingMessages } from './hooks/use-incoming-messages'
-import { useMessages } from './hooks/use-messages'
+import { useChatMessages } from './hooks/use-chat-messages'
 import { useSendMessage } from './hooks/use-send-message'
 import styles from './ChatPage.module.scss'
 
@@ -13,9 +12,8 @@ export function ChatPage() {
   const phone = normalizePhone(params.phone ?? '')
   const chatName = formatPhone(phone)
 
-  const { messages, addMessage, updateMessage } = useMessages()
-  const send = useSendMessage({ phone, addMessage, updateMessage })
-  useIncomingMessages({ phone, addMessage })
+  const messages = useChatMessages(phone)
+  const send = useSendMessage(phone)
 
   return (
     <div className={styles.page}>

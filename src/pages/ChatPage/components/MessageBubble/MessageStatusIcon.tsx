@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { Check, CircleAlert, Clock3, type LucideIcon } from 'lucide-react'
-import type { MessageStatus } from '../../lib/types'
+import type { MessageStatus } from '@/types/message'
 import styles from './MessageStatusIcon.module.scss'
 
 interface MessageStatusIconProps {

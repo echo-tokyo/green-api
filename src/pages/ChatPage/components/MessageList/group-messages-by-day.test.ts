@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import type { Message } from '../../lib/types'
+import type { Message } from '@/types/message'
 import { groupMessagesByDay } from './group-messages-by-day'
 
 function createMessage(id: string, date: Date): Message {

@@ -1,20 +1,19 @@
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router'
+import { useEffect, useEffectEvent } from 'react'
 import { toast } from 'sonner'
-import { ROUTES } from '@/config/routes'
 import { setUnauthorizedHandler } from '@/services/api/client'
-import { logout } from '@/services/auth/session'
+import { useLogout } from './use-logout'
 
 export function useUnauthorizedRedirect() {
-  const navigate = useNavigate()
+  const logout = useLogout()
+
+  const handleUnauthorized = useEffectEvent(() => {
+    logout()
+    toast.error('Сессия недействительна. Войдите заново')
+  })
 
   useEffect(() => {
-    setUnauthorizedHandler(() => {
-      logout()
-      toast.error('Сессия недействительна. Войдите заново')
-      void navigate(ROUTES.login)
-    })
+    setUnauthorizedHandler(() => handleUnauthorized())
 
     return () => setUnauthorizedHandler(null)
-  }, [navigate])
+  }, [])
 }

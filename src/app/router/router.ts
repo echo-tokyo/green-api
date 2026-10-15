@@ -6,7 +6,12 @@ import { ChatPage } from '@/pages/ChatPage/ChatPage'
 import { ErrorPage } from '@/pages/ErrorPage/ErrorPage'
 import { LoginPage } from '@/pages/LoginPage/LoginPage'
 import { SearchPage } from '@/pages/SearchPage/SearchPage'
-import { redirectToSearch, requireAuth, requireGuest } from './route-guards'
+import {
+  redirectToSearch,
+  requireAuth,
+  requireGuest,
+  requireValidPhone,
+} from './route-guards'
 
 export const routes: RouteObject[] = [
   {
@@ -21,7 +26,7 @@ export const routes: RouteObject[] = [
     loader: requireAuth,
     children: [
       { path: ROUTES.search, Component: SearchPage },
-      { path: ROUTES.chat, Component: ChatPage },
+      { path: ROUTES.chat, Component: ChatPage, loader: requireValidPhone },
     ],
   },
   { path: '*', loader: redirectToSearch },

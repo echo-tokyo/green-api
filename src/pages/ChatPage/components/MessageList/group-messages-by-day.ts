@@ -1,5 +1,5 @@
+import type { Message } from '@/types/message'
 import { formatDay, getStartOfDay } from '@/utils/date'
-import type { Message } from '../../lib/types'
 
 interface MessageGroup {
   day: number

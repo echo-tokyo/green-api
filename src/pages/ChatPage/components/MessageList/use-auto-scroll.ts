@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from 'react'
-import type { Message } from '../../lib/types'
+import type { Message } from '@/types/message'
 
 const BOTTOM_THRESHOLD_PX = 80
 

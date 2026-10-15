@@ -32,4 +32,15 @@ describe('delay', () => {
     await vi.advanceTimersByTimeAsync(0)
     expect(onResolve).toHaveBeenCalled()
   })
+
+  it('завершается сразу, если отмена была раньше', async () => {
+    const controller = new AbortController()
+    const onResolve = vi.fn()
+
+    controller.abort()
+    void delay(1000, controller.signal).then(onResolve)
+
+    await vi.advanceTimersByTimeAsync(0)
+    expect(onResolve).toHaveBeenCalled()
+  })
 })

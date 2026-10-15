@@ -1,4 +1,4 @@
-import type { Message } from '../../lib/types'
+import type { Message } from '@/types/message'
 import { MessageBubble } from '../MessageBubble/MessageBubble'
 import { groupMessagesByDay } from './group-messages-by-day'
 import { useAutoScroll } from './use-auto-scroll'

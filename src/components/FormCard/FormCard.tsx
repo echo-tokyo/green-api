@@ -6,7 +6,7 @@ interface FormCardProps {
   icon: IconComponent
   title: string
   description: string
-  onSubmit: (event: SubmitEvent<HTMLFormElement>) => void
+  onSubmit?: (event: SubmitEvent<HTMLFormElement>) => void
   children: ReactNode
 }
 

@@ -1,25 +1,21 @@
 import { useEffect, useEffectEvent } from 'react'
-import { useNavigate } from 'react-router'
+import { useMatch, useNavigate } from 'react-router'
 import { toast } from 'sonner'
-import { getChatRoute } from '@/config/routes'
+import { getChatRoute, ROUTES } from '@/config/routes'
 import { pollNotifications } from '@/services/api/polling'
+import { useMessagesStore } from '@/store/messages-store'
 import type { NotificationBody } from '@/types/green-api'
-import { formatPhone } from '@/utils/phone'
-import { parseIncomingMessage } from '../lib/message'
-import type { Message } from '../lib/types'
+import type { Message } from '@/types/message'
+import { parseIncomingMessage } from '@/utils/message'
+import { formatPhone, normalizePhone } from '@/utils/phone'
 
-interface UseIncomingMessagesOptions {
-  phone: string
-  addMessage: (message: Message) => void
-}
-
-export function useIncomingMessages({
-  phone,
-  addMessage,
-}: UseIncomingMessagesOptions) {
+export function useIncomingMessages() {
   const navigate = useNavigate()
+  const chatMatch = useMatch(ROUTES.chat)
+  const openChatId = normalizePhone(chatMatch?.params.phone ?? '')
+  const addMessage = useMessagesStore((state) => state.addMessage)
 
-  function notifyAboutOtherChat(message: Message) {
+  function notifyAboutMessage(message: Message) {
     toast(`Новое сообщение от ${formatPhone(message.chatId)}`, {
       description: message.text,
       action: {
@@ -34,11 +30,9 @@ export function useIncomingMessages({
 
     if (!message) return
 
-    if (message.chatId === phone) {
-      addMessage(message)
-    } else {
-      notifyAboutOtherChat(message)
-    }
+    addMessage(message)
+
+    if (message.chatId !== openChatId) notifyAboutMessage(message)
   })
 
   useEffect(() => {

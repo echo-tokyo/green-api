@@ -1,5 +1,5 @@
 import type { NotificationBody } from '@/types/green-api'
-import type { Message } from './types'
+import type { Message } from '@/types/message'
 
 const INCOMING_MESSAGE_TYPE = 'incomingMessageReceived'
 const MS_IN_SECOND = 1000
